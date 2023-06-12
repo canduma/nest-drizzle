@@ -28,7 +28,7 @@ This module was created to integrate [Drizzle ORM](https://orm.drizzle.team/) wi
 To install this project:
 
 ```bash
-npm i @canduma/nest-drizzle 
+npm i @ockonor/nest-drizzle 
 npm i -D drizzle-kit
 ```
 
@@ -36,7 +36,7 @@ npm i -D drizzle-kit
 
 ```js
 // in your module
-import { NestDrizzleModule } from '@canduma/nest-drizzle';
+import { NestDrizzleModule } from '@ockonor/nest-drizzle';
 
 @Module({
   controllers: [NestDrizzleClientController],
@@ -57,11 +57,11 @@ export class ...
 Don't forget to import the good types in your controllers/services
 ```js
 // if you have driver 'postgres-js'|'supabase'|'neon'
-import { PostgresJsDb, DRIZZLE_ORM } from '@canduma/nest-drizzle';
+import { PostgresJsDb, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 // or if you have driver 'mysql2'|'planetscale'
-import { MySql2Db, DRIZZLE_ORM } from '@canduma/nest-drizzle';
+import { MySql2Db, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 // or if you have the driver 'sqlite3'
-import { SQLite3Db, DRIZZLE_ORM } from '@canduma/nest-drizzle';
+import { SQLite3Db, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 
 ```
 
@@ -69,7 +69,7 @@ import { SQLite3Db, DRIZZLE_ORM } from '@canduma/nest-drizzle';
 // in your controller or service
 import { Controller, Get, Inject } from '@nestjs/common';
 import { user } from '../../schema';
-import { PostgresJsDb, DRIZZLE_ORM } from '@canduma/nest-drizzle';
+import { PostgresJsDb, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 
 @Controller()
 export class NestDrizzleClientController {
