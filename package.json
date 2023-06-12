@@ -6,8 +6,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/canduma/nest-drizzle.git"
+    "type": "git",
+    "url": "git+https://github.com/canduma/nest-drizzle.git"
   },
   "scripts": {
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
@@ -76,6 +76,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
+    "@ockonor/nest-drizzle": "^0.1.2",
     "better-sqlite3": "^8.4.0",
     "drizzle-orm": "^0.26.5",
     "mysql2": "^3.3.4",

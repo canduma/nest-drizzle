@@ -60,6 +60,25 @@ export const user = pgTable('user', {
   updatedAt: timestamp('updated_at'),
 });
 ```
+Add `generate` script in `package.json` and execute [drizzle-kit documentation here](https://orm.drizzle.team/kit-docs/overview)
+```json
+"scripts": {
+    "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+  + "generate": "drizzle-kit generate:pg"
+  },
+```
+``` bash
+# Update you schema
+npm run generate
+```
 
 ## Configuration
 
@@ -85,7 +104,7 @@ import { NestDrizzleModule } from '@ockonor/nest-drizzle';
 export class ...
 ```
 ### Types
-Don't forget to import the good types in your controllers/services
+Don't forget to import the good types in your `controllers/services`
 ```js
 // if you have driver 'postgres-js'|'supabase'|'neon'
 import { PostgresJsDb, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
@@ -121,4 +140,4 @@ export class NestDrizzleClientController {
 
 - [ ] Command for migration
 - [ ] Support another serverless databases + sqlite providers
-- [ ] Add forRoot and forRootAsync
+- [ ] Add `forRoot` and `forRootAsync`
