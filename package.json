@@ -1,10 +1,14 @@
 {
   "name": "@ockonor/nest-drizzle",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Integration of Drizzle ORM for Nestjs Framework",
   "author": "Julien Lenne <contact.lenne@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/canduma/nest-drizzle.git"
+  },
   "scripts": {
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
     "build": "tsc",
@@ -18,8 +22,17 @@
     "generate": "drizzle-kit generate:pg"
   },
   "keywords": [
-    "nestjs"
+    "nestjs",
+    "drizzle",
+    "neon",
+    "orm",
+    "sqlite3",
+    "postgres-js",
+    "mysql2",
+    "planetscale",
+    "supabase"
   ],
+  "homepage": "https://github.com/canduma/nest-drizzle#readme",
   "publishConfig": {
     "access": "public"
   },
