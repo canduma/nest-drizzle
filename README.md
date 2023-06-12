@@ -32,8 +32,38 @@ npm i @ockonor/nest-drizzle
 npm i -D drizzle-kit
 ```
 
-### Configuration
+Create the drizzle-kit configuration in your project root folder
+```js
+// <your project root>/drizzle.config.ts
+import type { Config } from "drizzle-kit";
+ 
+export default {
+  schema: "./src/schema.ts",
+  out: "./drizzle",
+} satisfies Config;
+```
 
+Create your schema in your project src folder
+
+See [documentation here](https://orm.drizzle.team/docs/schemas)
+```js
+// <your project root>/src/schema.ts
+import { serial, text, timestamp, pgTable } from 'drizzle-orm/pg-core';
+
+export const user = pgTable('user', {
+  id: serial('id'),
+  name: text('name'),
+  email: text('email'),
+  password: text('password'),
+  role: text('role').$type<'admin' | 'customer'>(),
+  createdAt: timestamp('created_at'),
+  updatedAt: timestamp('updated_at'),
+});
+```
+
+## Configuration
+
+### Modules
 ```js
 // in your module
 import { NestDrizzleModule } from '@ockonor/nest-drizzle';
@@ -54,6 +84,7 @@ import { NestDrizzleModule } from '@ockonor/nest-drizzle';
 })
 export class ...
 ```
+### Types
 Don't forget to import the good types in your controllers/services
 ```js
 // if you have driver 'postgres-js'|'supabase'|'neon'
@@ -64,6 +95,8 @@ import { MySql2Db, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 import { SQLite3Db, DRIZZLE_ORM } from '@ockonor/nest-drizzle';
 
 ```
+### Controllers / Services
+See [documentation here](https://orm.drizzle.team/docs/crud)
 
 ```js
 // in your controller or service
@@ -83,3 +116,9 @@ export class NestDrizzleClientController {
   }
 }
 ```
+
+## TODO
+
+- [ ] Command for migration
+- [ ] Support another serverless databases + sqlite providers
+- [ ] Add forRoot and forRootAsync
