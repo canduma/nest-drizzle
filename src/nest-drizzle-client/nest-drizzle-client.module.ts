@@ -15,13 +15,15 @@ import { NestDrizzleModule } from '../nest-drizzle.module';
 
 @Module({
   controllers: [NestDrizzleClientController],
-  imports: [NestDrizzleModule.registerAsync({
-    useFactory: () => {
-      return {
-        driver: 'postgres-js',
-        url: "postgres://user:admin@localhost:54320/nestdrizzle"
-      };
-    },
-  })],
+  imports: [
+    NestDrizzleModule.registerAsync({
+      useFactory: () => {
+        return {
+          driver: 'postgres-js',
+          url: 'postgres://user:admin@localhost:54320/nestdrizzle',
+        };
+      },
+    }),
+  ],
 })
 export class NestDrizzleClientModule {}

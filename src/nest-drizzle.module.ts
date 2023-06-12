@@ -1,8 +1,6 @@
 import { Module, DynamicModule, Provider, Global } from '@nestjs/common';
 import { NestDrizzleService } from './nest-drizzle.service';
-import {
-  NEST_DRIZZLE_OPTIONS,
-} from './constants';
+import { NEST_DRIZZLE_OPTIONS } from './constants';
 import {
   NestDrizzleOptions,
   NestDrizzleAsyncOptions,
@@ -11,7 +9,6 @@ import {
 
 import { createNestDrizzleProviders } from './nest-drizzle.providers';
 import { connectionFactory } from './nest-drizzle-connection.provider';
-
 
 @Global()
 @Module({
@@ -22,9 +19,7 @@ export class NestDrizzleModule {
   /**
    * Registers a configured NestDrizzle Module for import into the current module
    */
-  public static register(
-    options: NestDrizzleOptions,
-  ): DynamicModule {
+  public static register(options: NestDrizzleOptions): DynamicModule {
     return {
       module: NestDrizzleModule,
       providers: createNestDrizzleProviders(options),
@@ -35,20 +30,14 @@ export class NestDrizzleModule {
    * Registers a configured NestDrizzle Module for import into the current module
    * using dynamic options (factory, etc)
    */
-  public static registerAsync(
-    options: NestDrizzleAsyncOptions,
-  ): DynamicModule {
+  public static registerAsync(options: NestDrizzleAsyncOptions): DynamicModule {
     return {
       module: NestDrizzleModule,
-      providers: [
-        ...this.createProviders(options),
-      ],
+      providers: [...this.createProviders(options)],
     };
   }
 
-  private static createProviders(
-    options: NestDrizzleAsyncOptions,
-  ): Provider[] {
+  private static createProviders(options: NestDrizzleAsyncOptions): Provider[] {
     if (options.useExisting || options.useFactory) {
       return [this.createOptionsProvider(options)];
     }
@@ -75,11 +64,10 @@ export class NestDrizzleModule {
 
     // For useExisting...
     return {
-  provide: NEST_DRIZZLE_OPTIONS,
+      provide: NEST_DRIZZLE_OPTIONS,
       useFactory: async (optionsFactory: NestDrizzleOptionsFactory) =>
         await optionsFactory.createNestDrizzleOptions(),
       inject: [options.useExisting || options.useClass],
     };
   }
-
- }
+}

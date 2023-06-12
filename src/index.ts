@@ -1,5 +1,5 @@
-import { PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import { MySql2Database} from "drizzle-orm/mysql2";
+import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+import { MySql2Database } from 'drizzle-orm/mysql2';
 import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 
 export * from './nest-drizzle.service';

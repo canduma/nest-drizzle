@@ -1,9 +1,5 @@
-import {
-  NestDrizzleOptions,
-} from './nest-drizzle-options.interface';
+import { NestDrizzleOptions } from './nest-drizzle-options.interface';
 
 export interface NestDrizzleOptionsFactory {
-  createNestDrizzleOptions():
-    | Promise<NestDrizzleOptions>
-    | NestDrizzleOptions;
+  createNestDrizzleOptions(): Promise<NestDrizzleOptions> | NestDrizzleOptions;
 }

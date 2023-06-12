@@ -1,5 +1,5 @@
 {
-  "name": "@ockonor/nest-drizzle",
+  "name": "@canduma/nest-drizzle",
   "version": "0.1.0",
   "description": "Integration of Drizzle ORM for Nestjs Framework",
   "author": "Julien Lenne <contact.lenne@gmail.com>",
