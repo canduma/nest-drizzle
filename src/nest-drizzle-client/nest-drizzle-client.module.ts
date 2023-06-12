@@ -11,7 +11,7 @@
  */
 import { Module } from '@nestjs/common';
 import { NestDrizzleClientController } from './nest-drizzle-client.controller';
-import { NestDrizzleModule } from '@ockonor/nest-drizzle';
+import { NestDrizzleModule } from '../';
 
 @Module({
   controllers: [NestDrizzleClientController],
