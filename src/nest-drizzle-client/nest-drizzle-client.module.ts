@@ -16,7 +16,7 @@ import { NestDrizzleModule } from '../';
 @Module({
   controllers: [NestDrizzleClientController],
   imports: [
-    NestDrizzleModule.registerAsync({
+    NestDrizzleModule.forRootAsync({
       useFactory: () => {
         return {
           driver: 'postgres-js',

@@ -16,9 +16,6 @@ import { connectionFactory } from './nest-drizzle-connection.provider';
   exports: [NestDrizzleService, connectionFactory],
 })
 export class NestDrizzleModule {
-  /**
-   * Registers a configured NestDrizzle Module for import into the current module
-   */
   public static register(options: NestDrizzleOptions): DynamicModule {
     return {
       module: NestDrizzleModule,
@@ -26,14 +23,27 @@ export class NestDrizzleModule {
     };
   }
 
-  /**
-   * Registers a configured NestDrizzle Module for import into the current module
-   * using dynamic options (factory, etc)
-   */
   public static registerAsync(options: NestDrizzleAsyncOptions): DynamicModule {
     return {
       module: NestDrizzleModule,
       providers: [...this.createProviders(options)],
+    };
+  }
+
+  public static forRoot(options: NestDrizzleOptions): DynamicModule {
+    const providers = createNestDrizzleProviders(options);
+    return {
+      module: NestDrizzleModule,
+      providers: providers,
+      exports: providers,
+    };
+  }
+
+  public static forRootAsync(options: NestDrizzleAsyncOptions): DynamicModule {
+    return {
+      module: NestDrizzleModule,
+      providers: [...this.createProviders(options)],
+      exports: [...this.createProviders(options)],
     };
   }
 
@@ -62,7 +72,6 @@ export class NestDrizzleModule {
       };
     }
 
-    // For useExisting...
     return {
       provide: NEST_DRIZZLE_OPTIONS,
       useFactory: async (optionsFactory: NestDrizzleOptionsFactory) =>

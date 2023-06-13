@@ -140,4 +140,4 @@ export class NestDrizzleClientController {
 
 - [ ] Command for migration
 - [ ] Support another serverless databases + sqlite providers
-- [ ] Add `forRoot` and `forRootAsync`
+- [X] Add `forRoot` and `forRootAsync`
