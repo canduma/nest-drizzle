@@ -12,7 +12,7 @@
 
 <div align="center">
   <a href="https://nestjs.com" target="_blank">
-    <img src="https://img.shields.io/badge/built%20with-NestJs-red.svg" alt="Built with NestJS">
+    <img src="https://img.shields.io/badge/built%20with-NestJs 9-brightgreen.svg" alt="Built with NestJS">
   </a>
   <a href="https://github.com/nestjsplus/dyn-schematics" target="_blank">
     <img src="https://img.shields.io/badge/Built%20with-%40nestjsplus%2Fdyn--schematics-brightgreen" alt="Built with @nestjsplus/dyn-schematics">

@@ -1,6 +1,6 @@
 {
   "name": "@ockonor/nest-drizzle",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Integration of Drizzle ORM for Nestjs Framework",
   "author": "Julien Lenne <contact.lenne@gmail.com>",
   "license": "MIT",
