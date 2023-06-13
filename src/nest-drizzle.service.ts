@@ -1,7 +1,9 @@
-// tslint:disable: variable-name
 import { Injectable, Inject } from '@nestjs/common';
 import { NEST_DRIZZLE_OPTIONS } from './constants';
 import { NestDrizzleOptions } from './interfaces';
+import { migrate as migratePgJs } from 'drizzle-orm/postgres-js/migrator';
+import { migrate as migrateMysql2 } from 'drizzle-orm/mysql2/migrator';
+import { migrate as migrateSqLite3 } from 'drizzle-orm/better-sqlite3/migrator';
 import {
   PostgresJsDatabase,
   drizzle as drizzlePgJs,
@@ -15,7 +17,6 @@ import {
   drizzle as drizzleSqLite,
   BetterSQLite3Database,
 } from 'drizzle-orm/better-sqlite3';
-import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import * as postgres from 'postgres';
 import * as mysql from 'mysql2/promise';
 import * as BetterSqlite3 from 'better-sqlite3';
@@ -38,10 +39,37 @@ export class NestDrizzleService implements INestDrizzleService {
     throw new Error('Method not implemented.');
   }
   async migrate() {
+    let client:
+      | postgres.Sql<Record<string, never>>
+      | MySql2Database<Record<string, never>>
+      | BetterSQLite3Database<Record<string, never>>;
+    switch (this._NestDrizzleOptions.driver) {
+      case 'postgres-js' || 'supabase' || 'neon':
+        client = postgres(this._NestDrizzleOptions.url, { max: 1 });
+        await migratePgJs(drizzlePgJs(client), {
+          migrationsFolder: './drizzle',
+        });
+        break;
+      case 'mysql2' || 'planetscale':
+        const pool = mysql.createPool(this._NestDrizzleOptions.url);
+        client = drizzleMysql2(pool);
+        await migrateMysql2(client, { migrationsFolder: './drizzle' });
+        break;
+      case 'sqlite3':
+        const db = new BetterSqlite3(this._NestDrizzleOptions.url);
+        client = drizzleSqLite(db, this._NestDrizzleOptions.options);
+        migrateSqLite3(client, { migrationsFolder: './drizzle' });
+        break;
+      default:
+        throw new Error(`This Drizzle driver don't exist`);
+    }
     // migrate(drizzlePgJs(this._NestDrizzleOptions.migrationClient), { migrationsFolder: './drizzle' })
   }
   async getDrizzle() {
-    let client: postgres.Sql<{}> | MySql2Client | BetterSqlite3.Database;
+    let client:
+      | postgres.Sql<Record<string, unknown>>
+      | MySql2Client
+      | BetterSqlite3.Database;
     if (!this._drizzle) {
       switch (this._NestDrizzleOptions.driver) {
         case 'postgres-js' || 'supabase' || 'neon':
