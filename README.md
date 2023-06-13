@@ -3,7 +3,9 @@
 <div align="center">
   <a href="http://nestjs.com/" target="_blank">
     <img src="https://nestjs.com/img/logo_text.svg" width="150" alt="Nest Logo" /></a>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/500px-Plus_symbol.svg.png" alt="Drizzle ORM Logo" width=45>
+    <a href="#">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/500px-Plus_symbol.svg.png" alt="+" width=45>
+    </a>
     <a href="https://orm.drizzle.team" target="_blank">
     <img src="https://images.opencollective.com/drizzle-orm/9405e48/logo/256.png" alt="Drizzle ORM Logo" width=60>
     </a>
