@@ -83,6 +83,13 @@ npm run generate
 ## Configuration
 
 ### Modules
+
+Methods: 
+- `register()` 
+- `registerAsync()` 
+- `forRoot()` 
+- `forRootAsync()`
+
 ```js
 // in your module
 import { NestDrizzleModule } from '@ockonor/nest-drizzle';
