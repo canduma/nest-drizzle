@@ -1,4 +1,5 @@
 import { DrizzleConfig } from 'drizzle-orm';
+import { MigrationConfig } from 'drizzle-orm/migrator';
 
 export interface NestDrizzleOptions {
   driver:
@@ -9,5 +10,6 @@ export interface NestDrizzleOptions {
     | 'planetscale'
     | 'sqlite3';
   url: string;
-  options?: DrizzleConfig<Record<string, never>>;
+  options?: DrizzleConfig<Record<string, unknown>>;
+  migrationOptions?: MigrationConfig;
 }

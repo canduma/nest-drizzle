@@ -4,6 +4,7 @@ import { NestDrizzleOptions } from './interfaces';
 import { migrate as migratePgJs } from 'drizzle-orm/postgres-js/migrator';
 import { migrate as migrateMysql2 } from 'drizzle-orm/mysql2/migrator';
 import { migrate as migrateSqLite3 } from 'drizzle-orm/better-sqlite3/migrator';
+
 import {
   PostgresJsDatabase,
   drizzle as drizzlePgJs,
@@ -46,19 +47,20 @@ export class NestDrizzleService implements INestDrizzleService {
     switch (this._NestDrizzleOptions.driver) {
       case 'postgres-js' || 'supabase' || 'neon':
         client = postgres(this._NestDrizzleOptions.url, { max: 1 });
-        await migratePgJs(drizzlePgJs(client), {
-          migrationsFolder: './drizzle',
-        });
+        await migratePgJs(
+          drizzlePgJs(client),
+          this._NestDrizzleOptions.migrationOptions,
+        );
         break;
       case 'mysql2' || 'planetscale':
         const pool = mysql.createPool(this._NestDrizzleOptions.url);
         client = drizzleMysql2(pool);
-        await migrateMysql2(client, { migrationsFolder: './drizzle' });
+        await migrateMysql2(client, this._NestDrizzleOptions.migrationOptions);
         break;
       case 'sqlite3':
         const db = new BetterSqlite3(this._NestDrizzleOptions.url);
         client = drizzleSqLite(db, this._NestDrizzleOptions.options);
-        migrateSqLite3(client, { migrationsFolder: './drizzle' });
+        migrateSqLite3(client, this._NestDrizzleOptions.migrationOptions);
         break;
       default:
         throw new Error(`This Drizzle driver don't exist`);
@@ -67,7 +69,7 @@ export class NestDrizzleService implements INestDrizzleService {
   }
   async getDrizzle() {
     let client:
-      | postgres.Sql<Record<string, unknown>>
+      | postgres.Sql<Record<string, never>>
       | MySql2Client
       | BetterSqlite3.Database;
     if (!this._drizzle) {
@@ -94,6 +96,6 @@ export class NestDrizzleService implements INestDrizzleService {
           throw new Error(`This Drizzle driver don't exist`);
       }
     }
-    return this._drizzle as typeof this._drizzle;
+    return this._drizzle;
   }
 }
