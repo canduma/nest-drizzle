@@ -45,14 +45,17 @@ export class NestDrizzleService implements INestDrizzleService {
       | MySql2Database<Record<string, never>>
       | BetterSQLite3Database<Record<string, never>>;
     switch (this._NestDrizzleOptions.driver) {
-      case 'postgres-js' || 'supabase' || 'neon':
+      case 'postgres-js':
+      case 'supabase':
+      case 'neon':
         client = postgres(this._NestDrizzleOptions.url, { max: 1 });
         await migratePgJs(
           drizzlePgJs(client),
           this._NestDrizzleOptions.migrationOptions,
         );
         break;
-      case 'mysql2' || 'planetscale':
+      case 'mysql2':
+      case 'planetscale':
         const pool = mysql.createPool(this._NestDrizzleOptions.url);
         client = drizzleMysql2(pool);
         await migrateMysql2(client, this._NestDrizzleOptions.migrationOptions);
@@ -63,7 +66,7 @@ export class NestDrizzleService implements INestDrizzleService {
         migrateSqLite3(client, this._NestDrizzleOptions.migrationOptions);
         break;
       default:
-        throw new Error(`This Drizzle driver don't exist`);
+        throw new Error(`This Drizzle driver doesn't exist`);
     }
     // migrate(drizzlePgJs(this._NestDrizzleOptions.migrationClient), { migrationsFolder: './drizzle' })
   }
@@ -74,11 +77,14 @@ export class NestDrizzleService implements INestDrizzleService {
       | BetterSqlite3.Database;
     if (!this._drizzle) {
       switch (this._NestDrizzleOptions.driver) {
-        case 'postgres-js' || 'supabase' || 'neon':
+        case 'postgres-js':
+        case 'supabase':
+        case 'neon':
           client = postgres(this._NestDrizzleOptions.url);
           this._drizzle = drizzlePgJs(client, this._NestDrizzleOptions.options);
           break;
-        case 'mysql2' || 'planetscale':
+        case 'mysql2':
+        case 'planetscale':
           client = await mysql.createConnection(this._NestDrizzleOptions.url);
           this._drizzle = drizzleMysql2(
             client,
@@ -93,7 +99,7 @@ export class NestDrizzleService implements INestDrizzleService {
           );
           break;
         default:
-          throw new Error(`This Drizzle driver don't exist`);
+          throw new Error(`This Drizzle driver doesn't exist`);
       }
     }
     return this._drizzle;
