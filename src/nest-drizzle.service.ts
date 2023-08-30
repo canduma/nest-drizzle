@@ -96,7 +96,7 @@ export class NestDrizzleService implements INestDrizzleService {
           client = new BetterSqlite3(this._NestDrizzleOptions.url);
           this._drizzle = drizzleSqLite(
             client,
-            this._NestDrizzleOptions.mysql2Options,
+            this._NestDrizzleOptions.options,
           );
           break;
         default:
