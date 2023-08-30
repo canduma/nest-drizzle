@@ -1,6 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { PostgresJsDb, DRIZZLE_ORM } from '../';
-import { books } from 'src/schema';
+import { books } from '../schema';
 
 @Controller()
 export class NestDrizzleClientController {
