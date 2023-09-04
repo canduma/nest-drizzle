@@ -1,13 +1,13 @@
 {
-  "name": "@ockonor/nest-drizzle",
+  "name": "@ulloa/nest-drizzle",
   "version": "1.1.0",
   "description": "Integration of Drizzle ORM for Nestjs Framework",
-  "author": "Julien Lenne <contact.lenne@gmail.com>",
+  "author": "Samuel Ulloa <contact@samuelulloa.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/canduma/nest-drizzle.git"
+    "url": "git+https://github.com/ulloa/nest-drizzle.git"
   },
   "scripts": {
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
@@ -32,7 +32,7 @@
     "planetscale",
     "supabase"
   ],
-  "homepage": "https://github.com/canduma/nest-drizzle#readme",
+  "homepage": "https://github.com/ulloa/nest-drizzle#readme",
   "publishConfig": {
     "access": "public"
   },
