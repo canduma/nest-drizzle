@@ -13,6 +13,7 @@ import {
   drizzle as drizzleMysql2,
   MySql2Client,
   MySql2Database,
+  MySql2DrizzleConfig,
 } from 'drizzle-orm/mysql2';
 import {
   drizzle as drizzleSqLite,
@@ -88,7 +89,7 @@ export class NestDrizzleService implements INestDrizzleService {
           client = await mysql.createConnection(this._NestDrizzleOptions.url);
           this._drizzle = drizzleMysql2(
             client,
-            this._NestDrizzleOptions.options,
+            this._NestDrizzleOptions.mysql2Options,
           );
           break;
         case 'sqlite3':
